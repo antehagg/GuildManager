@@ -673,11 +673,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\andreas.hagglund\\source\\repos\\GuildManager\\GuildManager.Server\\GuildManager.Server.csproj",
+      "projectUniqueName": "C:\\Users\\andreas.hagglund\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\GuildManager.Server.csproj",
       "projectName": "GuildManager.Server",
-      "projectPath": "C:\\Users\\andreas.hagglund\\source\\repos\\GuildManager\\GuildManager.Server\\GuildManager.Server.csproj",
+      "projectPath": "C:\\Users\\andreas.hagglund\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\GuildManager.Server.csproj",
       "packagesPath": "C:\\Users\\andreas.hagglund\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andreas.hagglund\\source\\repos\\GuildManager\\GuildManager.Server\\obj\\",
+      "outputPath": "C:\\Users\\andreas.hagglund\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

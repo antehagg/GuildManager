@@ -1,0 +1,9 @@
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\bin\Debug\netcoreapp2.0\GuildManager.Data.deps.json
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\bin\Debug\netcoreapp2.0\GuildManager.Data.dll
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\obj\Debug\netcoreapp2.0\GuildManager.Data.csprojResolveAssemblyReference.cache
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\obj\Debug\netcoreapp2.0\GuildManager.Data.csproj.CoreCompileInputs.cache
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\obj\Debug\netcoreapp2.0\GuildManager.Data.AssemblyInfoInputs.cache
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\obj\Debug\netcoreapp2.0\GuildManager.Data.AssemblyInfo.cs
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\bin\Debug\netcoreapp2.0\GuildManager.Data.pdb
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\obj\Debug\netcoreapp2.0\GuildManager.Data.dll
+C:\Users\andreas.hagglund\Documents\GitHub\GuildManager\GuildManager.Data\obj\Debug\netcoreapp2.0\GuildManager.Data.pdb
