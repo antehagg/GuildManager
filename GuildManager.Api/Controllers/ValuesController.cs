@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuildManager.Api.Controllers
@@ -13,13 +14,16 @@ namespace GuildManager.Api.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            var user = HttpContext.User;
             return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
+        [Authorize]
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            var user = HttpContext.User;
             return "value";
         }
 
