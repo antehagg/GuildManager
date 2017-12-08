@@ -28,7 +28,7 @@ namespace GuildManager.Api.Controllers
             {
                 try
                 {
-                    var players = context.PlayerCharacters.ToArray();
+                    var players = context.GetAllPlayers();
                     return players;
                 }
                 catch (Exception e)

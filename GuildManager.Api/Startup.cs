@@ -27,7 +27,7 @@ namespace GuildManager.Api
         {
             services.AddOptions();
 
-
+            
             services.AddDbContext<GuildManagerContext>(
             options => options.UseSqlServer(
                 Configuration.GetConnectionString(
@@ -43,7 +43,6 @@ namespace GuildManager.Api
             loggerFactory.AddDebug();
 
             app.UseMvc();
-            DbInitializer.Initialize(context);
         }
     }
 }

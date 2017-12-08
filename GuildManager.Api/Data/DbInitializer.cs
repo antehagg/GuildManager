@@ -3,31 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuildManager.Data.GameObjects.Characters;
+using GuildManager.Data.GameObjects.Classes;
 
 namespace GuildManager.Api.Data
 {
     public static class DbInitializer
     {
-
-        public static void Initialize(GuildManagerContext context) //SchoolContext is EF context
+        public static void Initialize(GuildManagerContext context)
         {
+            context.Database.EnsureCreated();
 
-            context.Database.EnsureCreated(); //if db is not exist ,it will create database .but ,do nothing .
+            if (!context.GameClasses.Any())
+            {
 
-            // Look for any students.
+                context.GameClasses.AddRange(
+                    new GameClass
+                    {
+                        Name = "Warrior",
+                        BaseHealth = 20,
+                        BaseStrength = 10
+                    },
+                    new GameClass
+                    {
+                        Name = "Rogue",
+                        BaseHealth = 10,
+                        BaseStrength = 10
+                    });
+
+                context.SaveChanges();
+            }
+
             if (context.PlayerCharacters.Any())
             {
-                return; // DB has been seeded
+                return;
             }
 
             context.PlayerCharacters.AddRange(
                 new PlayerCharacter
                 {
-                    Name = "Vexing"
+                    Name = "Vexing",
+                    ClassId = 1
                 },
                 new PlayerCharacter
                 {
-                    Name = "Credit"
+                    Name = "Credit",
+                    ClassId = 2
                 });
 
             context.SaveChanges();

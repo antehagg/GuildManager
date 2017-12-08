@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildManager.Api", "GuildManager.Api\GuildManager.Api.csproj", "{F118BAE8-F857-43A8-B23C-569438A11C1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuildManager.Api", "GuildManager.Api\GuildManager.Api.csproj", "{F118BAE8-F857-43A8-B23C-569438A11C1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildManager.Data", "GuildManager.Data\GuildManager.Data.csproj", "{87E97FF4-F536-48E7-9BD6-E0BDFB40EB3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuildManager.Data", "GuildManager.Data\GuildManager.Data.csproj", "{87E97FF4-F536-48E7-9BD6-E0BDFB40EB3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildManager.Server", "GuildManager.Server\GuildManager.Server.csproj", "{54C1808D-3EF3-450B-843A-C4C61EB46DC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuildManager.Server", "GuildManager.Server\GuildManager.Server.csproj", "{54C1808D-3EF3-450B-843A-C4C61EB46DC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildManager.Editor", "GuildManager.Editor\GuildManager.Editor.csproj", "{0D3FAC78-D293-4B26-A00A-955EA2242C8D}"
 EndProject
