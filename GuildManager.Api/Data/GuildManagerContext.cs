@@ -1,4 +1,5 @@
 ﻿using GuildManager.Data.GameObjects.Characters;
+using GuildManager.Data.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuildManager.Api.Data

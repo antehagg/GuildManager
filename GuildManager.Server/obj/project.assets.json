@@ -664,7 +664,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andreas.hagglund\\.nuget\\packages\\": {},
+    "C:\\Users\\andreas\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -673,17 +673,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\andreas.hagglund\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\GuildManager.Server.csproj",
+      "projectUniqueName": "C:\\Users\\andreas\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\GuildManager.Server.csproj",
       "projectName": "GuildManager.Server",
-      "projectPath": "C:\\Users\\andreas.hagglund\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\GuildManager.Server.csproj",
-      "packagesPath": "C:\\Users\\andreas.hagglund\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andreas.hagglund\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\obj\\",
+      "projectPath": "C:\\Users\\andreas\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\GuildManager.Server.csproj",
+      "packagesPath": "C:\\Users\\andreas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\andreas\\Documents\\GitHub\\GuildManager\\GuildManager.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\andreas.hagglund\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\andreas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -709,7 +709,7 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0",
+            "version": "2.0",
             "autoReferenced": true
           }
         },

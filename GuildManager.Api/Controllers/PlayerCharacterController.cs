@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GuildManager.Api.Data;
 using GuildManager.Data.GameObjects.Characters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
