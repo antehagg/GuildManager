@@ -5,12 +5,42 @@ using System.Collections.Generic;
 
 namespace GuildManager.Api.Migrations
 {
-    public partial class Initial : Migration
+    public partial class REinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "EquipedItems",
+                name: "BaseResources",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BaseHealth = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BaseResources", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BaseStats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BaseAgility = table.Column<int>(nullable: false),
+                    BaseIntelligence = table.Column<int>(nullable: false),
+                    BaseStamina = table.Column<int>(nullable: false),
+                    BaseStrength = table.Column<int>(nullable: false),
+                    BaseWisdom = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BaseStats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DbEquipedItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -18,7 +48,31 @@ namespace GuildManager.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EquipedItems", x => x.Id);
+                    table.PrimaryKey("PK_DbEquipedItems", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DbInventory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DbInventory", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DbRace",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DbRace", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -27,37 +81,26 @@ namespace GuildManager.Api.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BaseHealth = table.Column<int>(nullable: false),
-                    BaseStrength = table.Column<int>(nullable: false),
+                    BaseResourcesId = table.Column<int>(nullable: true),
+                    BaseStatsId = table.Column<int>(nullable: true),
+                    MainStat = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GameClasses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Inventory",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inventory", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Race",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Race", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GameClasses_BaseResources_BaseResourcesId",
+                        column: x => x.BaseResourcesId,
+                        principalTable: "BaseResources",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_GameClasses_BaseStats_BaseStatsId",
+                        column: x => x.BaseStatsId,
+                        principalTable: "BaseStats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,24 +125,34 @@ namespace GuildManager.Api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PlayerCharacters_EquipedItems_EquipedItemsId",
+                        name: "FK_PlayerCharacters_DbEquipedItems_EquipedItemsId",
                         column: x => x.EquipedItemsId,
-                        principalTable: "EquipedItems",
+                        principalTable: "DbEquipedItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PlayerCharacters_Inventory_InventoryId",
+                        name: "FK_PlayerCharacters_DbInventory_InventoryId",
                         column: x => x.InventoryId,
-                        principalTable: "Inventory",
+                        principalTable: "DbInventory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PlayerCharacters_Race_RaceId",
+                        name: "FK_PlayerCharacters_DbRace_RaceId",
                         column: x => x.RaceId,
-                        principalTable: "Race",
+                        principalTable: "DbRace",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GameClasses_BaseResourcesId",
+                table: "GameClasses",
+                column: "BaseResourcesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GameClasses_BaseStatsId",
+                table: "GameClasses",
+                column: "BaseStatsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerCharacters_ClassId",
@@ -131,13 +184,19 @@ namespace GuildManager.Api.Migrations
                 name: "GameClasses");
 
             migrationBuilder.DropTable(
-                name: "EquipedItems");
+                name: "DbEquipedItems");
 
             migrationBuilder.DropTable(
-                name: "Inventory");
+                name: "DbInventory");
 
             migrationBuilder.DropTable(
-                name: "Race");
+                name: "DbRace");
+
+            migrationBuilder.DropTable(
+                name: "BaseResources");
+
+            migrationBuilder.DropTable(
+                name: "BaseStats");
         }
     }
 }

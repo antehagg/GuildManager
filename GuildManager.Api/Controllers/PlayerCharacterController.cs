@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuildManager.Api.Data;
+using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameObjects.Characters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,15 @@ namespace GuildManager.Api.Controllers
             {
                 try
                 {
-                    var players = context.GetAllPlayers();
+                    var players = new List<PlayerCharacter>();
+                    var playerInfo = context.GetAllPlayers();
+
+                    foreach (var pi in playerInfo)
+                    {
+                        var player = new PlayerCharacter(pi);
+                        players.Add(player);
+                    }
+
                     return players;
                 }
                 catch (Exception e)
@@ -41,13 +50,13 @@ namespace GuildManager.Api.Controllers
 
         // GET api/PlayerCharacter/5
         [HttpGet("{playerId}")]
-        public PlayerCharacter Get(int playerId)
+        public DbPlayerCharacter Get(int playerId)
         {
             using (var context = Services.GetService<GuildManagerContext>())
             {
                 try
                 {
-                    var player = context.PlayerCharacters.FirstOrDefault(p => p.Id == playerId);
+                    var player = context.GetPlayerById(playerId);
                     return player;
                 }
                 catch (Exception e)

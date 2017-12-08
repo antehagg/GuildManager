@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GuildManager.Data.GameObjects.Characters;
-using GuildManager.Data.GameObjects.Classes;
+using GuildManager.Data.GameData.Characters;
+using GuildManager.Data.GameData.Classes;
+using GuildManager.Data.GameData.Classes.GameClassData;
 
 namespace GuildManager.Api.Data
 {
@@ -17,40 +18,61 @@ namespace GuildManager.Api.Data
             {
 
                 context.GameClasses.AddRange(
-                    new GameClass
+                    new DbGamelass
                     {
                         Name = "Warrior",
-                        BaseHealth = 20,
-                        BaseStrength = 10
+                        BaseStats = new BaseStats
+                        {
+                            BaseAgility = 10,
+                            BaseIntelligence = 10,
+                            BaseStamina = 20,
+                            BaseStrength = 20,
+                            BaseWisdom = 10
+                        },
+                        BaseResources = new BaseResources
+                        {
+                            BaseHealth = 100
+                        },
+                        MainStat = StatName.Strength
                     },
-                    new GameClass
+                    new DbGamelass
                     {
                         Name = "Rogue",
-                        BaseHealth = 10,
-                        BaseStrength = 10
+                        BaseStats = new BaseStats
+                        {
+                            BaseAgility = 20,
+                            BaseIntelligence = 10,
+                            BaseStamina = 20,
+                            BaseStrength = 10,
+                            BaseWisdom = 10
+                        },
+                        BaseResources = new BaseResources
+                        {
+                            BaseHealth = 50
+                        },
+                        MainStat = StatName.Agility
                     });
 
                 context.SaveChanges();
             }
 
-            if (context.PlayerCharacters.Any())
+            if (!context.PlayerCharacters.Any())
             {
-                return;
+
+                context.PlayerCharacters.AddRange(
+                    new DbPlayerCharacter
+                    {
+                        Name = "Vexing",
+                        ClassId = 1
+                    },
+                    new DbPlayerCharacter
+                    {
+                        Name = "Credit",
+                        ClassId = 2
+                    });
+
+                context.SaveChanges();
             }
-
-            context.PlayerCharacters.AddRange(
-                new PlayerCharacter
-                {
-                    Name = "Vexing",
-                    ClassId = 1
-                },
-                new PlayerCharacter
-                {
-                    Name = "Credit",
-                    ClassId = 2
-                });
-
-            context.SaveChanges();
         }
     }
 }

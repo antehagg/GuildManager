@@ -1,5 +1,5 @@
 ﻿using System;
-using GuildManager.Data.GameObjects.Characters;
+using GuildManager.Data.GameData.Characters;
 using Newtonsoft.Json;
 
 namespace GuildManager.Server
@@ -9,7 +9,7 @@ namespace GuildManager.Server
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var pc = new PlayerCharacter
+            var pc = new DbPlayerCharacter
             {
                 Name = "Vexing"
             };
