@@ -20,7 +20,15 @@ namespace GuildManager.Server
             var request = new RestRequest();
             var response = client.Execute(request);
 
-            var player = JsonConvert.DeserializeObject<DbPlayerCharacter>(response.Content);
+            var dbVexing = JsonConvert.DeserializeObject<DbPlayerCharacter>(response.Content);
+            var vexing = new PlayerCharacter(dbVexing);
+
+            client.BaseUrl = new Uri("http://guildmanagerapi.azurewebsites.net/api/playercharacter/2");
+            request = new RestRequest();
+            response = client.Execute(request);
+
+            var dbCredit = JsonConvert.DeserializeObject<DbPlayerCharacter>(response.Content);
+            var credit = new PlayerCharacter(dbCredit);
         }
     }
 }
