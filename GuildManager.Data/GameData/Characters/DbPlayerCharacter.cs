@@ -13,6 +13,7 @@ namespace GuildManager.Data.GameData.Characters
 
         public DbRace Race { get; set; }
         public DbInventory Inventory { get; set; }
+        public int EquipedItemsId { get; set; }
         public DbEquipedItems EquipedItems { get; set; }
     }
 }

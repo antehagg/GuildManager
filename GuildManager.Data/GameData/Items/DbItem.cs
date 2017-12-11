@@ -10,6 +10,7 @@ namespace GuildManager.Data.GameData.Items
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int StatsId { get; set; }
         public  ItemStats Stats { get; set; }
         public ItemRarity ItemRarity { get; set; }
     }

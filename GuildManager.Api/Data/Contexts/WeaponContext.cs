@@ -11,6 +11,11 @@ namespace GuildManager.Api.Data.Contexts
     public class WeaponContext
     {
         private readonly GuildManagerContext _context;
+        public WeaponContext(GuildManagerContext context)
+        {
+            _context = context;
+        }
+
         public WeaponContext(IServiceProvider service)
         {
             _context = service.GetService<GuildManagerContext>();
@@ -19,6 +24,7 @@ namespace GuildManager.Api.Data.Contexts
         public DbWeapon GetWeaponById(int itemId)
         {
             var weapon = _context.Weapons.First(w => w.Id == itemId);
+            weapon.Stats = _context.ItemStats.First(i => i.Id == weapon.StatsId);
             return weapon;
         }
     }

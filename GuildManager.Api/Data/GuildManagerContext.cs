@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using GuildManager.Api.Data.Contexts;
 using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameData.Classes;
 using GuildManager.Data.GameData.Classes.GameClassData;
 using GuildManager.Data.GameData.Items;
+using GuildManager.Data.GameData.Items.ItemsData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +17,9 @@ namespace GuildManager.Api.Data
         {
         }
 
+        public DbSet<DbEquipedItems> EquippedItems { get; set; }
         public DbSet<DbWeapon> Weapons { get; set; }
+        public DbSet<ItemStats> ItemStats { get; set; }
         public DbSet<DbPlayerCharacter> PlayerCharacters { get; set; }
         public DbSet<DbGamelass> GameClasses { get; set; }
         public DbSet<BaseStats> BaseStats { get; set; }
@@ -26,10 +30,13 @@ namespace GuildManager.Api.Data
             try
             {
                 var context = this;
+                var equippedItemsContext = new EquippedItemsContext(context);
+
                 var players = context.PlayerCharacters.ToArray();
                 foreach (var p in players)
                 {
                     p.Class = GetClassById(p.ClassId);
+                    p.EquipedItems = equippedItemsContext.GetEquippedItemsById(p.EquipedItemsId);
                 }
 
                 return players;

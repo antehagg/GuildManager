@@ -23,6 +23,7 @@ namespace GuildManager.Data.GameObjects.Characters
             Id = playerInfo.Id;
             Name = playerInfo.Name;
             Class = playerInfo.Class;
+            EquippedItems = new EquippedItems(playerInfo.EquipedItems);
             CalculateStats();
         }
 
