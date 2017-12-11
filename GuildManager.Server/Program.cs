@@ -20,7 +20,7 @@ namespace GuildManager.Server
             var request = new RestRequest();
             var response = client.Execute(request);
 
-            var players = JsonConvert.DeserializeObject<PlayerCharacter>(response.Content);
+            var player = JsonConvert.DeserializeObject<DbPlayerCharacter>(response.Content);
         }
     }
 }

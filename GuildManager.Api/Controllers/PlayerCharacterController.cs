@@ -23,21 +23,13 @@ namespace GuildManager.Api.Controllers
 
         // GET api/PlayerCharacter
         [HttpGet]
-        public IEnumerable<PlayerCharacter> Get()
+        public IEnumerable<DbPlayerCharacter> Get()
         {
             using (var context = Services.GetService<GuildManagerContext>())
             {
                 try
                 {
-                    var players = new List<PlayerCharacter>();
-                    var playerInfo = context.GetAllPlayers();
-
-                    foreach (var pi in playerInfo)
-                    {
-                        var player = new PlayerCharacter(pi);
-                        players.Add(player);
-                    }
-
+                    var players = context.GetAllPlayers();
                     return players;
                 }
                 catch (Exception e)

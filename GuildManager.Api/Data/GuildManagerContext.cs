@@ -54,6 +54,7 @@ namespace GuildManager.Api.Data
                     .Include(p => p.Class).ThenInclude(c => c.BaseResources).Include(c => c.Class).ThenInclude(c => c.BaseStats)
                     .Include(p => p.Inventory)
                     .ToArray();
+
                 return players;
             }
             catch (Exception e)
@@ -68,9 +69,11 @@ namespace GuildManager.Api.Data
             try
             {
                 var context = this;
-                var player = context.PlayerCharacters.Include(p => p.EquipedItems).ThenInclude(e => e.MainHand)
-                    .Include(p => p.Class).ThenInclude(c => c.BaseResources).Include(c => c.Class).ThenInclude(c => c.BaseStats).
-                    First(p => p.Id == playerId);
+                var player = context.PlayerCharacters
+                    .Include(p => p.EquipedItems).ThenInclude(e => e.MainHand).ThenInclude(mh => mh.Stats)
+                    .Include(p => p.Class).ThenInclude(c => c.BaseResources).Include(c => c.Class).ThenInclude(c => c.BaseStats)
+                    .Include(p => p.Inventory)
+                    .First(p => p.Id == playerId);
 
                 return player;
             }
