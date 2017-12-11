@@ -1,34 +1,55 @@
-﻿using GuildManager.Data.GameData.Classes.GameClassData;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GuildManager.Data.GameData.Classes;
+using GuildManager.Data.GameData.Classes.GameClassData;
+using GuildManager.Data.GameData.Items.ItemsData;
+using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
 
 namespace GuildManager.Data.GameObjects.Characters.Stats
 {
     public class PlayerStats
     {
-        public Stat Strength { get; set; }
-        public Stat Stamina { get; set; }
-        public Stat Agility { get; set; }
-        public Stat Wisdom { get; set; }
-        public Stat Intelligence { get; set; }
+        public int Strength { get; set; }
+        public int Stamina { get; set; }
+        public int Agility { get; set; }
+        public int Wisdom { get; set; }
+        public int Intelligence { get; set; }
+
+        public double Haste { get; set; }
+        public double CritChance { get; set; }
+
         public Resource Health { get; set; }
+        public Resource Energy { get; set; }
 
-        public PlayerStats(BaseStats baseStats, BaseResources baseResources)
+        public PlayerStats(BaseStats baseStats, BaseResources baseResources, StatName mainStat, ItemStats itemStats)
         {
-            CalculateStats(baseStats);
-            CalculateResources(baseResources);
+            CalculateStats(baseStats, itemStats);
+            CalculateResources(baseResources, mainStat, itemStats);
         }
 
-        private void CalculateStats(BaseStats basestats)
+        private void CalculateStats(BaseStats baseStats, ItemStats itemStats)
         {
-            Strength = new Stat(basestats.BaseStrength, 0, 0);
-            Agility = new Stat(basestats.BaseAgility, 0, 0);
-            Stamina = new Stat(basestats.BaseStamina, 0, 0);
-            Wisdom = new Stat(basestats.BaseWisdom, 0, 0);
-            Intelligence = new Stat(basestats.BaseIntelligence, 0, 0);
+            Strength = baseStats.BaseStrength + itemStats.Strength;
+            Stamina = baseStats.BaseStamina + itemStats.Stamina;
+            Agility = baseStats.BaseAgility + itemStats.Agility;
+            Wisdom = baseStats.BaseWisdom + itemStats.Wisdom;
+            Intelligence = baseStats.BaseIntelligence + itemStats.Intelligence;
+
+            Haste = itemStats.Haste;
+            CritChance = 10 + itemStats.CritChance;
         }
 
-        private void CalculateResources(BaseResources baseResources)
+        private void CalculateResources(BaseResources baseResources, StatName mainStat, ItemStats itemStats)
         {
-            Health = new Resource(baseResources.BaseHealth, 0, 0, Stamina.MaxValue);
+            Health = new Health(baseResources.BaseHealth, itemStats.Health, 0, Stamina);
+            if(mainStat == StatName.Agility)
+                Energy = new Energy(100, itemStats.Agility , 0 , Agility);
+            if (mainStat == StatName.Strength)
+                Energy = new Energy(100, itemStats.Strength, 0, Strength);
+            if (mainStat == StatName.Wisdom)
+                Energy = new Energy(100, itemStats.Wisdom, 0, Wisdom);
+            if (mainStat == StatName.Intelligence)
+                Energy = new Energy(100, itemStats.Intelligence, 0, Intelligence);
         }
     }
 }

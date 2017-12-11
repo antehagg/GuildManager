@@ -1,20 +1,13 @@
 ﻿namespace GuildManager.Data.GameObjects.Characters.Stats
 {
-    public class Resource
+    public abstract class Resource
     {
         public int MaxValue { get; set; }
         public int CurrentValue { get; set; }
 
-        public Resource(int baseValue, int itemsValue, int buffsValue, int statValue)
+        protected Resource(int baseValue, int itemsValue, int buffsValue, int mainStat)
         {
-            var maxValue = baseValue + itemsValue + buffsValue + statValue*5;
-            MaxValue = maxValue;
-            SetCurrentValue(maxValue);
-        }
 
-        private void SetCurrentValue(int value)
-        {
-            CurrentValue = value;
         }
     }
 }

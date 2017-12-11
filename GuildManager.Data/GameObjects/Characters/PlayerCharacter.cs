@@ -14,6 +14,7 @@ namespace GuildManager.Data.GameObjects.Characters
         public int Id { get; set; }
         public string Name { get; set; }
         public DbGamelass Class { get; set; }
+        public EquippedItems EquippedItems { get; set; }
 
         public PlayerStats Stats { get; set; }
 
@@ -27,7 +28,7 @@ namespace GuildManager.Data.GameObjects.Characters
 
         private void CalculateStats()
         {
-            Stats = new PlayerStats(Class.BaseStats, Class.BaseResources);
+            Stats = new PlayerStats(Class.BaseStats, Class.BaseResources, Class.MainStat, EquippedItems.TotalStats);
         }
     }
 

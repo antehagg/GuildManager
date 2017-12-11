@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GuildManager.Api.Migrations
 {
-    public partial class REinit : Migration
+    public partial class Items : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,23 +40,12 @@ namespace GuildManager.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DbEquipedItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DbEquipedItems", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DbInventory",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Gold = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,13 +65,34 @@ namespace GuildManager.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ItemStats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Agility = table.Column<int>(nullable: false),
+                    CritChance = table.Column<double>(nullable: false),
+                    Energy = table.Column<int>(nullable: false),
+                    Haste = table.Column<double>(nullable: false),
+                    Health = table.Column<int>(nullable: false),
+                    Intelligence = table.Column<int>(nullable: false),
+                    Stamina = table.Column<int>(nullable: false),
+                    Strength = table.Column<int>(nullable: false),
+                    Wisdom = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemStats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GameClasses",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BaseResourcesId = table.Column<int>(nullable: true),
-                    BaseStatsId = table.Column<int>(nullable: true),
+                    BaseResourcesId = table.Column<int>(nullable: false),
+                    BaseStatsId = table.Column<int>(nullable: false),
                     MainStat = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -94,11 +104,58 @@ namespace GuildManager.Api.Migrations
                         column: x => x.BaseResourcesId,
                         principalTable: "BaseResources",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GameClasses_BaseStats_BaseStatsId",
                         column: x => x.BaseStatsId,
                         principalTable: "BaseStats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DbItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Discriminator = table.Column<string>(nullable: false),
+                    ItemRarity = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    StatsId = table.Column<int>(nullable: true),
+                    EquipSlotType = table.Column<int>(nullable: true),
+                    MaxDamage = table.Column<int>(nullable: true),
+                    MinDamage = table.Column<int>(nullable: true),
+                    SwingSpeed = table.Column<double>(nullable: true),
+                    WeaponEquipType = table.Column<int>(nullable: true),
+                    WeaponType = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DbItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DbItem_ItemStats_StatsId",
+                        column: x => x.StatsId,
+                        principalTable: "ItemStats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DbEquipedItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MainHandId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DbEquipedItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DbEquipedItems_DbItem_MainHandId",
+                        column: x => x.MainHandId,
+                        principalTable: "DbItem",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -143,6 +200,16 @@ namespace GuildManager.Api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DbEquipedItems_MainHandId",
+                table: "DbEquipedItems",
+                column: "MainHandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DbItem_StatsId",
+                table: "DbItem",
+                column: "StatsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameClasses_BaseResourcesId",
@@ -197,6 +264,12 @@ namespace GuildManager.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "BaseStats");
+
+            migrationBuilder.DropTable(
+                name: "DbItem");
+
+            migrationBuilder.DropTable(
+                name: "ItemStats");
         }
     }
 }

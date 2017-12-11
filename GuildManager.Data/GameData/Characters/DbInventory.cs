@@ -3,5 +3,6 @@
     public class DbInventory
     {
         public int Id { get; set; }
+        public int Gold { get; set; }
     }
 }

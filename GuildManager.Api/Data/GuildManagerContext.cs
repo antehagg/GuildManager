@@ -3,6 +3,7 @@ using System.Linq;
 using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameData.Classes;
 using GuildManager.Data.GameData.Classes.GameClassData;
+using GuildManager.Data.GameData.Items;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,7 @@ namespace GuildManager.Api.Data
         {
         }
 
+        public DbSet<DbWeapon> Weapons { get; set; }
         public DbSet<DbPlayerCharacter> PlayerCharacters { get; set; }
         public DbSet<DbGamelass> GameClasses { get; set; }
         public DbSet<BaseStats> BaseStats { get; set; }
