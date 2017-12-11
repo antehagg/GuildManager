@@ -15,9 +15,10 @@ using System;
 namespace GuildManager.Api.Migrations
 {
     [DbContext(typeof(GuildManagerContext))]
-    partial class GuildManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20171211153821_Addedforeginkey")]
+    partial class Addedforeginkey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,7 +84,7 @@ namespace GuildManager.Api.Migrations
 
                     b.Property<int>("ClassId");
 
-                    b.Property<int?>("EquipedItemsId");
+                    b.Property<int>("EquipedItemsId");
 
                     b.Property<int>("InventoryId");
 
@@ -233,7 +234,7 @@ namespace GuildManager.Api.Migrations
             modelBuilder.Entity("GuildManager.Data.GameData.Characters.DbEquipedItems", b =>
                 {
                     b.HasOne("GuildManager.Data.GameData.Items.DbItem", "MainHand")
-                        .WithMany("DbEquippedItems")
+                        .WithMany()
                         .HasForeignKey("MainHandId");
                 });
 
@@ -263,7 +264,8 @@ namespace GuildManager.Api.Migrations
 
                     b.HasOne("GuildManager.Data.GameData.Characters.DbEquipedItems", "EquipedItems")
                         .WithMany()
-                        .HasForeignKey("EquipedItemsId");
+                        .HasForeignKey("EquipedItemsId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GuildManager.Data.GameData.Characters.DbInventory", "Inventory")
                         .WithMany()

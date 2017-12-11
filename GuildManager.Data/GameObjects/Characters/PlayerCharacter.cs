@@ -14,6 +14,15 @@ namespace GuildManager.Data.GameObjects.Characters
 
         public PlayerStats Stats { get; set; }
 
+        public PlayerCharacter(int id, string name, DbGameClass dbGameClass, EquippedItems equippedItems, PlayerStats stats)
+        {
+            Id = id;
+            Name = name;
+            Class = dbGameClass;
+            EquippedItems = equippedItems;
+            Stats = stats;
+        }
+
         public PlayerCharacter(DbPlayerCharacter playerInfo)
         {
             Id = playerInfo.Id;

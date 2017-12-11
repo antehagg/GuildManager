@@ -22,7 +22,7 @@ namespace GuildManager.Api.Data
         public DbSet<ItemStats> ItemStats { get; set; }
         public DbSet<DbPlayerCharacter> PlayerCharacters { get; set; }
         public DbSet<DbMonster> Monsters { get; set; }
-        public DbSet<DbGamelass> GameClasses { get; set; }
+        public DbSet<DbGameClass> GameClasses { get; set; }
         public DbSet<BaseStats> BaseStats { get; set; }
         public DbSet<BaseResources> BaseResources { get; set; }
 
@@ -32,12 +32,7 @@ namespace GuildManager.Api.Data
             {
                 var context = this;
 
-                var monsters = context.Monsters.ToArray();
-
-                foreach (var m in monsters)
-                {
-                    m.Class = GetClassById(m.ClassId);
-                }
+                var monsters = context.Monsters.Include(m => m.Class).ToArray();
 
                 return monsters;
             }
@@ -53,15 +48,12 @@ namespace GuildManager.Api.Data
             try
             {
                 var context = this;
-                var equippedItemsContext = new EquippedItemsContext(context);
 
-                var players = context.PlayerCharacters.ToArray();
-                foreach (var p in players)
-                {
-                    p.Class = GetClassById(p.ClassId);
-                    p.EquipedItems = equippedItemsContext.GetEquippedItemsById(p.EquipedItemsId);
-                }
-
+                var players = context.PlayerCharacters
+                    .Include(p => p.EquipedItems).ThenInclude(e => e.MainHand).ThenInclude(mh => mh.Stats)
+                    .Include(p => p.Class).ThenInclude(c => c.BaseResources).Include(c => c.Class).ThenInclude(c => c.BaseStats)
+                    .Include(p => p.Inventory)
+                    .ToArray();
                 return players;
             }
             catch (Exception e)
@@ -76,57 +68,11 @@ namespace GuildManager.Api.Data
             try
             {
                 var context = this;
-                var player = context.PlayerCharacters.First(p => p.Id == playerId);
-                player.Class = GetClassById(player.ClassId);
+                var player = context.PlayerCharacters.Include(p => p.EquipedItems).ThenInclude(e => e.MainHand)
+                    .Include(p => p.Class).ThenInclude(c => c.BaseResources).Include(c => c.Class).ThenInclude(c => c.BaseStats).
+                    First(p => p.Id == playerId);
 
                 return player;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
-        public DbGamelass GetClassById(int classId)
-        {
-            try
-            {
-                var context = this;
-                var gameClass = context.GameClasses.First(c => c.Id == classId);
-                gameClass.BaseResources = GetBaseResourcesById(gameClass.BaseResourcesId);
-                gameClass.BaseStats = GetBaseStatsById(gameClass.BaseStatsId);
-                return gameClass;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
-        private BaseStats GetBaseStatsById(int baseStatId)
-        {
-            try
-            {
-                var context = this;
-                var baseStats = context.BaseStats.First(bs => bs.Id == baseStatId);
-                return baseStats;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
-        private BaseResources GetBaseResourcesById(int baseResourcesId)
-        {
-            try
-            {
-                var context = this;
-                var baseResources = context.BaseResources.First(br => br.Id == baseResourcesId);
-                return baseResources;
             }
             catch (Exception e)
             {

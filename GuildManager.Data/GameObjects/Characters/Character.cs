@@ -9,6 +9,6 @@ namespace GuildManager.Data.GameObjects.Characters
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DbGamelass Class { get; set; }
+        public DbGameClass Class { get; set; }
     }
 }

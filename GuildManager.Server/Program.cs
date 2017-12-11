@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GuildManager.Data.GameData.Characters;
+using GuildManager.Data.GameObjects.Characters;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -11,11 +14,13 @@ namespace GuildManager.Server
         {
             var client = new RestClient
             {
-                BaseUrl = new Uri("http://guildmanagerapi.azurewebsites.net/api/playercharacter")
+                BaseUrl = new Uri("http://guildmanagerapi.azurewebsites.net/api/playercharacter/1")
             };
 
             var request = new RestRequest();
             var response = client.Execute(request);
+
+            var players = JsonConvert.DeserializeObject<PlayerCharacter>(response.Content);
         }
     }
 }

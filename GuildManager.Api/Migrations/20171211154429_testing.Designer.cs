@@ -15,9 +15,10 @@ using System;
 namespace GuildManager.Api.Migrations
 {
     [DbContext(typeof(GuildManagerContext))]
-    partial class GuildManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20171211154429_testing")]
+    partial class testing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

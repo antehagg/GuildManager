@@ -59,24 +59,9 @@ namespace GuildManager.Api.Data
                 context.SaveChanges();
             }
 
-            if (!context.Weapons.Any())
-            {
-                var eiWarrior = new DbEquipedItems
-                {
-                    MainHandId = 2
-                };
-
-                var eiRogue = new DbEquipedItems
-                {
-                    MainHandId = 1
-                };
-
-                context.SaveChanges();
-            }
-
             if (!context.GameClasses.Any())
             {
-                var warrior = new DbGamelass
+                var warrior = new DbGameClass
                 {
                     Name = "Warrior",
                     BaseStats = new BaseStats
@@ -94,7 +79,7 @@ namespace GuildManager.Api.Data
                     MainStat = StatName.Strength
                 };
 
-                var rogue = new DbGamelass
+                var rogue = new DbGameClass
                 {
                     Name = "Rogue",
                     BaseStats = new BaseStats
@@ -122,15 +107,11 @@ namespace GuildManager.Api.Data
                 context.PlayerCharacters.AddRange(
                     new DbPlayerCharacter
                     {
-                        Name = "Vexing",
-                        ClassId = 1,
-                        EquipedItemsId = 2
+                        Name = "Vexing"
                     },
                     new DbPlayerCharacter
                     {
-                        Name = "Credit",
-                        ClassId = 2,
-                        EquipedItemsId = 1
+                        Name = "Credit"
                     });
 
                 context.SaveChanges();
@@ -143,13 +124,11 @@ namespace GuildManager.Api.Data
                     new DbMonster
                     {
                         Name = "Orc Pawn",
-                        ClassId = 1,
                         BaseResources = new BaseResources
                         {
                             BaseHealth = 100
                         },
-                        MonsterType = MonsterType.Common,
-                        InventoryId = 3
+                        MonsterType = MonsterType.Common
                     });
 
                 context.SaveChanges();

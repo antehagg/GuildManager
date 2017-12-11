@@ -4,13 +4,11 @@ using GuildManager.Data.GameData.Classes.GameClassData;
 
 namespace GuildManager.Data.GameData.Classes
 {
-    public class DbGamelass
+    public class DbGameClass
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int BaseStatsId { get; set; }
         public BaseStats BaseStats { get; set; }
-        public int BaseResourcesId { get; set; }
         public BaseResources BaseResources { get; set; }
         public StatName MainStat { get; set; }
     }

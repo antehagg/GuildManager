@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using GuildManager.Data.GameData.Items;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GuildManager.Api.Data.Contexts
@@ -23,8 +24,7 @@ namespace GuildManager.Api.Data.Contexts
 
         public DbWeapon GetWeaponById(int itemId)
         {
-            var weapon = _context.Weapons.First(w => w.Id == itemId);
-            weapon.Stats = _context.ItemStats.First(i => i.Id == weapon.StatsId);
+            var weapon = _context.Weapons.Include(w => w.Stats).First(w => w.Id == itemId);
             return weapon;
         }
     }

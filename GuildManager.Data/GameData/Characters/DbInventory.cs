@@ -7,6 +7,6 @@ namespace GuildManager.Data.GameData.Characters
     {
         public int Id { get; set; }
         public int Gold { get; set; }
-        public List<DbItem> InventoryItems { get; set; }
+        //public List<DbItem> InventoryItems { get; set; }
     }
 }
