@@ -21,9 +21,32 @@ namespace GuildManager.Api.Data
         public DbSet<DbWeapon> Weapons { get; set; }
         public DbSet<ItemStats> ItemStats { get; set; }
         public DbSet<DbPlayerCharacter> PlayerCharacters { get; set; }
+        public DbSet<DbMonster> Monsters { get; set; }
         public DbSet<DbGamelass> GameClasses { get; set; }
         public DbSet<BaseStats> BaseStats { get; set; }
         public DbSet<BaseResources> BaseResources { get; set; }
+
+        public DbMonster[] GetAllMonsters()
+        {
+            try
+            {
+                var context = this;
+
+                var monsters = context.Monsters.ToArray();
+
+                foreach (var m in monsters)
+                {
+                    m.Class = GetClassById(m.ClassId);
+                }
+
+                return monsters;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public DbPlayerCharacter[] GetAllPlayers()
         {

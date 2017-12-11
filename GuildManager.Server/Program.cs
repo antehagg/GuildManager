@@ -1,6 +1,7 @@
 ﻿using System;
 using GuildManager.Data.GameData.Characters;
 using Newtonsoft.Json;
+using RestSharp;
 
 namespace GuildManager.Server
 {
@@ -8,13 +9,13 @@ namespace GuildManager.Server
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            var pc = new DbPlayerCharacter
+            var client = new RestClient
             {
-                Name = "Vexing"
+                BaseUrl = new Uri("http://guildmanagerapi.azurewebsites.net/api/playercharacter")
             };
 
-            var json = JsonConvert.SerializeObject(pc);
+            var request = new RestRequest();
+            var response = client.Execute(request);
         }
     }
 }

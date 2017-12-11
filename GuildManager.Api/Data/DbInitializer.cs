@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuildManager.Data.GameData.Characters;
+using GuildManager.Data.GameData.Characters.CharactersData;
 using GuildManager.Data.GameData.Classes;
 using GuildManager.Data.GameData.Classes.GameClassData;
 using GuildManager.Data.GameData.Items;
 using GuildManager.Data.GameData.Items.ItemsData;
 using GuildManager.Data.GameData.Items.Types;
+using GuildManager.Data.GameObjects.Characters;
 
 namespace GuildManager.Api.Data
 {
@@ -57,6 +59,21 @@ namespace GuildManager.Api.Data
                 context.SaveChanges();
             }
 
+            if (!context.Weapons.Any())
+            {
+                var eiWarrior = new DbEquipedItems
+                {
+                    MainHandId = 2
+                };
+
+                var eiRogue = new DbEquipedItems
+                {
+                    MainHandId = 1
+                };
+
+                context.SaveChanges();
+            }
+
             if (!context.GameClasses.Any())
             {
                 var warrior = new DbGamelass
@@ -92,7 +109,7 @@ namespace GuildManager.Api.Data
                     {
                         BaseHealth = 50
                     },
-                    MainStat = StatName.Agility
+                    MainStat = StatName.Agility,
                 };
 
                 context.AddRange(warrior, rogue);
@@ -106,12 +123,33 @@ namespace GuildManager.Api.Data
                     new DbPlayerCharacter
                     {
                         Name = "Vexing",
-                        ClassId = 1
+                        ClassId = 1,
+                        EquipedItemsId = 2
                     },
                     new DbPlayerCharacter
                     {
                         Name = "Credit",
-                        ClassId = 2
+                        ClassId = 2,
+                        EquipedItemsId = 1
+                    });
+
+                context.SaveChanges();
+            }
+
+            if (!context.Monsters.Any())
+            {
+
+                context.Monsters.AddRange(
+                    new DbMonster
+                    {
+                        Name = "Orc Pawn",
+                        ClassId = 1,
+                        BaseResources = new BaseResources
+                        {
+                            BaseHealth = 100
+                        },
+                        MonsterType = MonsterType.Common,
+                        InventoryId = 3
                     });
 
                 context.SaveChanges();

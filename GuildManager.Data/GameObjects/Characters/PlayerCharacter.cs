@@ -4,16 +4,12 @@ using System.Text;
 using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameData.Classes;
 using GuildManager.Data.GameData.Classes.GameClassData;
-using GuildManager.Data.GameData.Races;
 using GuildManager.Data.GameObjects.Characters.Stats;
 
 namespace GuildManager.Data.GameObjects.Characters
 {
-    public class PlayerCharacter
+    public class PlayerCharacter : Character
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public DbGamelass Class { get; set; }
         public EquippedItems EquippedItems { get; set; }
 
         public PlayerStats Stats { get; set; }
