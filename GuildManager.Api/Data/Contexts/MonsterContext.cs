@@ -25,7 +25,7 @@ namespace GuildManager.Api.Data.Contexts
         public DbMonster[] GetAllMonsters()
         {
             var monsters = _context.Monsters
-                .Include(m => m.BaseResources)
+                .Include(m => m.MonsterBaseResources)
                 .Include(m => m.Class).ThenInclude(c => c.BaseStats)
                 .Include(m => m.Class).ThenInclude(c => c.BaseResources)
                 .Include(m => m.Inventory)
@@ -37,7 +37,7 @@ namespace GuildManager.Api.Data.Contexts
         public DbMonster GetMonsterById(int monsterId)
         {
             var monster = _context.Monsters
-                .Include(m => m.BaseResources)
+                .Include(m => m.MonsterBaseResources)
                 .Include(m => m.Class).ThenInclude(c => c.BaseStats)
                 .Include(m => m.Class).ThenInclude(c => c.BaseResources)
                 .Include(m => m.Inventory)

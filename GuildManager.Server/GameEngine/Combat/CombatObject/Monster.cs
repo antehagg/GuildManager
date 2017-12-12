@@ -9,8 +9,10 @@ namespace GuildManager.Server.GameEngine.Combat.CombatObject
     {
         public MonsterCharacter MonsterCharacter;
 
-        public Monster(MonsterCharacter monsterCharacter)
+        public Monster(MonsterCharacter monsterCharacter, bool isAttacker)
         {
+            IsMonster = true;
+            IsAttacker = isAttacker;
             MonsterCharacter = monsterCharacter;
             CalculateNextBaseAttack();
         }

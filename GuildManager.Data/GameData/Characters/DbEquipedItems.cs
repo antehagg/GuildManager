@@ -8,6 +8,6 @@ namespace GuildManager.Data.GameData.Characters
     public class DbEquipedItems
     {
         public int Id { get; set; }
-        public virtual DbItem MainHand { get; set; }
+        public virtual DbWeapon MainHand { get; set; }
     }
 }

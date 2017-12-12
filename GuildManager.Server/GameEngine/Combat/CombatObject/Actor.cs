@@ -9,6 +9,8 @@ namespace GuildManager.Server.GameEngine.Combat.CombatObject
         public Actor Target;
         private Actor _targetedBy;
         public bool IsAlive;
+        public bool IsAttacker;
+        public bool IsMonster;
 
         public int NextBaseAttack;
 

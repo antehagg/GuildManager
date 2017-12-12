@@ -11,7 +11,7 @@ namespace GuildManager.Data.GameObjects.Characters
     public class EquippedItems
     {
         public int Id { get; set; }
-        public DbItem MainHand { get; set; }
+        public DbWeapon MainHand { get; set; }
         public ItemStats TotalStats { get; set; }
 
         public EquippedItems(DbEquipedItems dbEquipedItems)

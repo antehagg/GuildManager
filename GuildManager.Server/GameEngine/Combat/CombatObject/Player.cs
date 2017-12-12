@@ -11,10 +11,20 @@ namespace GuildManager.Server.GameEngine.Combat.CombatObject
         public PlayerCharacter PlayerCharacter;
 
 
-        public Player(PlayerCharacter pc)
+        public Player(PlayerCharacter pc, bool isAttacker)
         {
+            IsMonster = false;
+            IsAttacker = isAttacker;
             PlayerCharacter = pc;
             CalculateNextBaseAttack();
+        }
+
+        public void ChangeHealth(int change)
+        {
+            PlayerCharacter.Stats.Health.CurrentValue += change;
+
+            if (PlayerCharacter.Stats.Health.CurrentValue <= 0)
+                IsAlive = false;
         }
 
         public void CalculateNextBaseAttack(int timer = 0)

@@ -11,43 +11,37 @@ namespace GuildManager.Server.GameEngine.Combat.Engine
 {
     public class Combat
     {
-        private List<Player> _players;
-        private List<Monster> _monsters;
+        private List<Actor> _attackers;
+        private List<Actor> _defenders;
+
+        private List<Actor> _combatMembers;
 
         private int _timer;
 
-        public Combat(List<Player> players, List<Monster> monsters)
+        public Combat(List<Actor> attackers, List<Actor> defenders)
         {
             _timer = 0;
-            _players = players;
-            _monsters = monsters;
-            
+            _attackers = attackers;
+            _defenders = defenders;
+
+            _combatMembers = new List<Actor>();
+
+            _combatMembers.AddRange(_attackers);
+            _combatMembers.AddRange(_defenders);
         }
 
         public void StartCombat()
         {
             while (TeamsAlive())
             {
-                var playerAttackers = _players.Where(p => p.NextBaseAttack == _timer).ToList();
-                var monsterAttackers = _monsters.Where(p => p.NextBaseAttack == _timer).ToList();
 
-                foreach (var p in playerAttackers)
-                {
-                    var rand = new Random();
-                    var weapon = (DbWeapon) p.PlayerCharacter.EquippedItems.MainHand;
-                    var damage = rand.Next(weapon.MaxDamage, weapon.MinDamage);
-
-                    p.SetTarget(_monsters.First(m => m.IsAlive));
-                    var target = (Monster) p.Target;
-                    target.ChangeHealth(-damage);
-                }
             }
         }
 
         private bool TeamsAlive()
         {
-            var playersAlive = _players.Where(a => a.IsAlive).ToList().Count;
-            var monstersAlive = _monsters.Where(a => a.IsAlive).ToList().Count;
+            var playersAlive = _attackers.Where(a => a.IsAlive).ToList().Count;
+            var monstersAlive = _defenders.Where(a => a.IsAlive).ToList().Count;
 
             if (playersAlive <= 0 && monstersAlive <= 0)
                 return true;

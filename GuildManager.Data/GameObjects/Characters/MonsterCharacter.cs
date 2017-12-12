@@ -13,9 +13,11 @@ namespace GuildManager.Data.GameObjects.Characters
     {
         public Resource Health { get; set; }
         public Resource Energy { get; set; }
+        public BaseResources MonsterBaseResources { get; set; }
 
         public MonsterCharacter(DbMonster monsterInfo)
         {
+            MonsterBaseResources = monsterInfo.MonsterBaseResources;
             Id = monsterInfo.Id;
             Name = monsterInfo.Name;
             Class = monsterInfo.Class;
@@ -24,8 +26,8 @@ namespace GuildManager.Data.GameObjects.Characters
 
         public void CalculateResource()
         {
-            Health = new Health(200, 0, 0, 0);
-            Energy = new Energy(100, 0, 0, 0);
+            Health = new Health(Class.BaseResources.BaseHealth, 0, 0, 0);
+            Energy = new Energy(100, 50, 0, 0);
         }
     }
 
