@@ -5,29 +5,29 @@ using GuildManager.Data.GameObjects.Characters;
 
 namespace GuildManager.Server.GameEngine.Combat.CombatObject
 {
-    public class Monster : Actor
+    public class MonsterObject : ICharacterObject
     {
         public MonsterCharacter MonsterCharacter;
+        public ICharacterObject Target { get; set; }
+        public ICharacterObject TargetedBy { get; set; }
+        public bool IsAttacker { get; set; }
+        public bool IsMonster { get; set; }
 
-        public Monster(MonsterCharacter monsterCharacter, bool isAttacker)
+        public MonsterObject(MonsterCharacter monsterCharacter, bool isAttacker)
         {
             IsMonster = true;
             IsAttacker = isAttacker;
             MonsterCharacter = monsterCharacter;
-            CalculateNextBaseAttack();
         }
 
         public void ChangeHealth(int change)
         {
             MonsterCharacter.Health.CurrentValue += change;
-
-            if (MonsterCharacter.Health.CurrentValue <= 0)
-                IsAlive = false;
         }
 
-        public void CalculateNextBaseAttack(int timer = 0)
+        public bool IsAlive()
         {
-            NextBaseAttack = 100 + timer;
+            return MonsterCharacter.Health.CurrentValue > 0;
         }
     }
 }

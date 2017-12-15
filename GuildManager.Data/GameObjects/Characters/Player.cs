@@ -8,13 +8,13 @@ using GuildManager.Data.GameObjects.Characters.Stats;
 
 namespace GuildManager.Data.GameObjects.Characters
 {
-    public class PlayerCharacter : Character
+    public class Player : Character
     {
         public EquippedItems EquippedItems { get; set; }
 
         public PlayerStats Stats { get; set; }
 
-        public PlayerCharacter(int id, string name, DbGameClass dbGameClass, EquippedItems equippedItems, PlayerStats stats)
+        public Player(int id, string name, DbGameClass dbGameClass, EquippedItems equippedItems, PlayerStats stats)
         {
             Id = id;
             Name = name;
@@ -23,7 +23,7 @@ namespace GuildManager.Data.GameObjects.Characters
             Stats = stats;
         }
 
-        public PlayerCharacter(DbPlayerCharacter playerInfo)
+        public Player(DbPlayerCharacter playerInfo)
         {
             Id = playerInfo.Id;
             Name = playerInfo.Name;

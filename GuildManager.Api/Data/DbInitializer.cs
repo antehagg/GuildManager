@@ -124,7 +124,7 @@ namespace GuildManager.Api.Data
                     new DbMonster
                     {
                         Name = "Orc Pawn",
-                        BaseResources = new BaseResources
+                        MonsterBaseResources = new BaseResources
                         {
                             BaseHealth = 100
                         },

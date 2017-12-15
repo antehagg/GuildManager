@@ -11,20 +11,20 @@ namespace GuildManager.Server.GameEngine.Combat.Engine
 {
     public class Combat
     {
-        private List<Actor> _attackers;
-        private List<Actor> _defenders;
+        private List<ICharacterObject> _attackers;
+        private List<ICharacterObject> _defenders;
 
-        private List<Actor> _combatMembers;
+        private List<ICharacterObject> _combatMembers;
 
         private int _timer;
 
-        public Combat(List<Actor> attackers, List<Actor> defenders)
+        public Combat(List<ICharacterObject> attackers, List<ICharacterObject> defenders)
         {
             _timer = 0;
             _attackers = attackers;
             _defenders = defenders;
 
-            _combatMembers = new List<Actor>();
+            _combatMembers = new List<ICharacterObject>();
 
             _combatMembers.AddRange(_attackers);
             _combatMembers.AddRange(_defenders);
@@ -40,8 +40,8 @@ namespace GuildManager.Server.GameEngine.Combat.Engine
 
         private bool TeamsAlive()
         {
-            var playersAlive = _attackers.Where(a => a.IsAlive).ToList().Count;
-            var monstersAlive = _defenders.Where(a => a.IsAlive).ToList().Count;
+            var playersAlive = _attackers.Where(a => a.IsAlive()).ToList().Count;
+            var monstersAlive = _defenders.Where(a => a.IsAlive()).ToList().Count;
 
             if (playersAlive <= 0 && monstersAlive <= 0)
                 return true;

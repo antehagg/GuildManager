@@ -23,14 +23,14 @@ namespace GuildManager.Server
             var response = client.Execute(request);
 
             var dbVexing = JsonConvert.DeserializeObject<DbPlayerCharacter>(response.Content);
-            var vexing = new PlayerCharacter(dbVexing);
+            var vexing = new Player(dbVexing);
 
             client.BaseUrl = new Uri("http://guildmanagerapi.azurewebsites.net/api/playercharacter/2");
             request = new RestRequest();
             response = client.Execute(request);
 
             var dbCredit = JsonConvert.DeserializeObject<DbPlayerCharacter>(response.Content);
-            var credit = new PlayerCharacter(dbCredit);
+            var credit = new Player(dbCredit);
 
             client.BaseUrl = new Uri("http://guildmanagerapi.azurewebsites.net/api/monster/2");
             request = new RestRequest();
@@ -39,13 +39,13 @@ namespace GuildManager.Server
             var dbMonster = JsonConvert.DeserializeObject<DbMonster>(response.Content);
             var monster = new MonsterCharacter(dbMonster);
 
-            var warriorPlayer = new Player(vexing, true);
-            var roguePlayer = new Player(credit, true);
+            var warriorPlayer = new PlayerObject(vexing, true);
+            var roguePlayer = new PlayerObject(credit, true);
 
-            var orcPawn = new Monster(monster, true);
+            var orcPawn = new MonsterObject(monster, true);
 
-            var playerList = new List<Actor>();
-            var monsterList = new List<Actor>();
+            var playerList = new List<ICharacterObject>();
+            var monsterList = new List<ICharacterObject>();
 
             playerList.Add(warriorPlayer);
             playerList.Add(roguePlayer);
