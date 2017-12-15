@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using GuildManager.Data.GameObjects.Characters;
+using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
 
-namespace GuildManager.Server.GameEngine.Combat.CombatObject
+namespace GuildManager.Server.GameEngine.GameObjects.Characters
 {
     public class MonsterObject : ICharacterObject
     {
@@ -28,6 +29,26 @@ namespace GuildManager.Server.GameEngine.Combat.CombatObject
         public bool IsAlive()
         {
             return MonsterCharacter.Health.CurrentValue > 0;
+        }
+
+        public int GetHealth()
+        {
+            return MonsterCharacter.Health.CurrentValue;
+        }
+
+        public int GetMinDamage(bool mainHand)
+        {
+            if (mainHand)
+                return 5;
+            else
+                return 5;
+        }
+        public int GetMaxDamage(bool mainHand)
+        {
+            if (mainHand)
+                return 10;
+            else
+                return 10;
         }
     }
 }

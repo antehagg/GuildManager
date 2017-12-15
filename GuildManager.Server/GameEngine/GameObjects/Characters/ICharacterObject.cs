@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
 
-namespace GuildManager.Server.GameEngine.Combat.CombatObject
+namespace GuildManager.Server.GameEngine.GameObjects.Characters
 {
     public interface ICharacterObject
     {
@@ -11,6 +12,12 @@ namespace GuildManager.Server.GameEngine.Combat.CombatObject
         bool IsAttacker { get; set; }
         bool IsMonster { get; set; }
 
+        int GetMinDamage(bool mainHand);
+        int GetMaxDamage(bool mainHand);
+
         bool IsAlive();
+
+        int GetHealth();
+        void ChangeHealth(int change);
     }
 }

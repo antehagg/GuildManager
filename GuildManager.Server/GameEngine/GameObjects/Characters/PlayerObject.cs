@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using GuildManager.Data.GameData.Items;
 using GuildManager.Data.GameObjects.Characters;
+using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
 
-namespace GuildManager.Server.GameEngine.Combat.CombatObject
+namespace GuildManager.Server.GameEngine.GameObjects.Characters
 {
     public class PlayerObject : ICharacterObject
     {
@@ -29,6 +30,26 @@ namespace GuildManager.Server.GameEngine.Combat.CombatObject
         public void ChangeHealth(int change)
         {
             PlayerCharacter.Stats.Health.CurrentValue += change;
+        }
+
+        public int GetHealth()
+        {
+            return PlayerCharacter.Stats.Health.CurrentValue;
+        }
+
+        public int GetMinDamage(bool mainHand)
+        {
+            if (mainHand)
+                return PlayerCharacter.EquippedItems.MainHand.MinDamage ;
+            else
+                return PlayerCharacter.EquippedItems.MainHand.MinDamage;
+        }
+        public int GetMaxDamage(bool mainHand)
+        {
+            if (mainHand)
+                return PlayerCharacter.EquippedItems.MainHand.MaxDamage;
+            else
+                return PlayerCharacter.EquippedItems.MainHand.MaxDamage;
         }
     }
 }
