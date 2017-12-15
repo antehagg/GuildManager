@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameObjects.Characters;
 using Newtonsoft.Json;
 using RestSharp;
-using GuildManager.Server.GameEngine.Combat.CombatObject;
 using GuildManager.Server.GameEngine.Combat.Engine;
+using GuildManager.Server.GameEngine.GameObjects.Characters;
+using GuildManager.Server.GameEngine.GameObjects.Groups;
 
 namespace GuildManager.Server
 {
@@ -51,7 +51,10 @@ namespace GuildManager.Server
             playerList.Add(roguePlayer);
             monsterList.Add(orcPawn);
 
-            var combat = new Combat(playerList, monsterList);
+            var attackerGroup = new CharacterGroup(playerList, warriorPlayer);
+            var defenderGroup = new CharacterGroup(monsterList, orcPawn);
+
+            var combat = new Combat(attackerGroup, defenderGroup);
         }
     }
 }
