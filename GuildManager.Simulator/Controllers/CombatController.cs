@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using GuildManager.Data.GameData.Characters;
-using GuildManager.Data.GameObjects.Characters;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestSharp;
+using GuildManager.Data.GameData.Characters;
+using GuildManager.Data.GameObjects.Characters;
 using GuildManager.Server.GameEngine.Combat.Engine;
 using GuildManager.Server.GameEngine.GameObjects.Characters;
 using GuildManager.Server.GameEngine.GameObjects.Groups;
 
-namespace GuildManager.Server
+namespace GuildManager.Simulator.Controllers
 {
-    class Program
+    public class CombatController : Controller
     {
-        static void Main(string[] args)
+        public IActionResult Index()
         {
             var client = new RestClient
             {
@@ -55,8 +58,9 @@ namespace GuildManager.Server
             var defenderGroup = new CharacterGroup(monsterList, orcPawn);
 
             var combat = new Combat(attackerGroup, defenderGroup);
-
             combat.StartCombat();
+
+            return View();
         }
     }
 }

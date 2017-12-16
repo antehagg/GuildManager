@@ -42,8 +42,16 @@ namespace GuildManager.Server.GameEngine.Combat.Engine
                 }
 
                 _timer++;
+                UpdateGroups();
             }
         }
+
+        private void UpdateGroups()
+        {
+            _attackers.UpdateGroup();
+            _defenders.UpdateGroup();
+        }
+
 
         private void ExecuteAction(CombatDesicion action, ICharacterObject actor)
         {
@@ -66,13 +74,13 @@ namespace GuildManager.Server.GameEngine.Combat.Engine
 
         private bool TeamsAlive()
         {
-            var playersAlive = _attackers.IsDead;
-            var monstersAlive = _defenders.IsDead;
+            var attackersDead = _attackers.IsDead;
+            var defendersDead = _defenders.IsDead;
 
-            if (playersAlive && monstersAlive)
-                return true;
+            if (attackersDead || defendersDead)
+                return false;
 
-            return false;
+            return true;
         }
     }
 }

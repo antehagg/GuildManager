@@ -14,20 +14,19 @@ namespace GuildManager.Server.GameEngine.AI.Combat
         {
             var madeDdesicion = CombatDesicion.Wait;
             // Make sure actor has valid target
-            if (actor.Equals(actorGroup.MainAssist))
+            if (actor.Target == null)
             {
-                var target = defenderGroup.Members.First(m => m.Equals(actorGroup.MainAssist));
-                if (!target.IsAlive())
+                if (actor.Equals(actorGroup.MainAssist))
                 {
                     actor.Target = ChangeTarget(defenderGroup);
                 }
-            }
-            else
-            {
-                if (actor.Target != actorGroup.MainAssist.Target)
+                else
                 {
-                    actor.Target = actorGroup.MainAssist.Target;
-                    return CombatDesicion.ChangeTarget;
+                    if (actor.Target != actorGroup.MainAssist.Target)
+                    {
+                        actor.Target = actorGroup.MainAssist.Target;
+                        return CombatDesicion.ChangeTarget;
+                    }
                 }
             }
 

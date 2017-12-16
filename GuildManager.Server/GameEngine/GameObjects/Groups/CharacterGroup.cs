@@ -18,7 +18,12 @@ namespace GuildManager.Server.GameEngine.GameObjects.Groups
             IsDead = false;
         }
 
-        public void CheckDeadStatus()
+        public void UpdateGroup()
+        {
+            CheckDeadStatus();
+        }
+
+        private void CheckDeadStatus()
         {
             var aliveCount = 0;
 
