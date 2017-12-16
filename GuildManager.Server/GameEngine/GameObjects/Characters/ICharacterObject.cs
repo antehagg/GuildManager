@@ -12,6 +12,9 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
         bool IsAttacker { get; set; }
         bool IsMonster { get; set; }
 
+        int NextMainHandAttack { get; set; }
+        int NextOffHandAttack { get; set; }
+
         int GetMinDamage(bool mainHand);
         int GetMaxDamage(bool mainHand);
 
@@ -19,5 +22,7 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
 
         int GetHealth();
         void ChangeHealth(int change);
+
+        void UpdateNextMainHandAttack(int timer = 0);
     }
 }

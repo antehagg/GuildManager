@@ -40,18 +40,21 @@ namespace GuildManager.Server.GameEngine.Combat.Engine
 
                     ExecuteAction(desicion, c);
                 }
+
+                _timer++;
             }
         }
 
         private void ExecuteAction(CombatDesicion action, ICharacterObject actor)
         {
-            if (action == CombatDesicion.BaseAttack)
+            if (action == CombatDesicion.MainHandBaseAttack)
             {
-                MakeBaseAttack(actor);
+                MakeBaseAttack(actor, CombatDesicion.MainHandBaseAttack);
+                actor.UpdateNextMainHandAttack(_timer);
             }
         }
 
-        private void MakeBaseAttack(ICharacterObject actor)
+        private void MakeBaseAttack(ICharacterObject actor, CombatDesicion attackHand)
         {
             var min = actor.GetMinDamage(true);
             var max = actor.GetMaxDamage(true);

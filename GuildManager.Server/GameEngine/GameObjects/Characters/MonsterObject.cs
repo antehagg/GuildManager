@@ -13,12 +13,26 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
         public ICharacterObject TargetedBy { get; set; }
         public bool IsAttacker { get; set; }
         public bool IsMonster { get; set; }
+        public int NextMainHandAttack { get; set; }
+        public int NextOffHandAttack { get; set; }
 
         public MonsterObject(MonsterCharacter monsterCharacter, bool isAttacker)
         {
             IsMonster = true;
             IsAttacker = isAttacker;
             MonsterCharacter = monsterCharacter;
+            SetNextAttack();
+        }
+
+        public void SetNextAttack(int timer = 0)
+        {
+            UpdateNextMainHandAttack();
+            NextOffHandAttack = 0;
+        }
+
+        public void UpdateNextMainHandAttack(int timer = 0)
+        {
+            NextMainHandAttack = 100 + timer;
         }
 
         public void ChangeHealth(int change)

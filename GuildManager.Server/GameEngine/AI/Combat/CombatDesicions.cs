@@ -12,6 +12,7 @@ namespace GuildManager.Server.GameEngine.AI.Combat
     {
         public static CombatDesicion MakeDesicion(ICharacterObject actor, CharacterGroup actorGroup, CharacterGroup defenderGroup, int timer)
         {
+            var madeDdesicion = CombatDesicion.Wait;
             // Make sure actor has valid target
             if (actor.Equals(actorGroup.MainAssist))
             {
@@ -28,10 +29,14 @@ namespace GuildManager.Server.GameEngine.AI.Combat
                     actor.Target = actorGroup.MainAssist.Target;
                     return CombatDesicion.ChangeTarget;
                 }
-                
             }
 
-            return CombatDesicion.BaseAttack;
+            if (timer == actor.NextMainHandAttack)
+            {
+                return CombatDesicion.MainHandBaseAttack;
+            }
+
+            return madeDdesicion;
         }
 
         private static ICharacterObject ChangeTarget(CharacterGroup defenderGroup)
@@ -42,5 +47,5 @@ namespace GuildManager.Server.GameEngine.AI.Combat
 
     }
 
-    public enum CombatDesicion { BaseAttack, ChangeTarget }
+    public enum CombatDesicion { Wait, MainHandBaseAttack, ChangeTarget }
 }

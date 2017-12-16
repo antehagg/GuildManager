@@ -14,12 +14,23 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
         public ICharacterObject TargetedBy { get; set; }
         public bool IsAttacker { get; set; }
         public bool IsMonster { get; set; }
+        public int NextMainHandAttack { get; set; }
+        public int NextOffHandAttack { get; set; }
 
         public PlayerObject(Player pc, bool isAttacker)
         {
             IsMonster = false;
             IsAttacker = isAttacker;
             PlayerCharacter = pc;
+            SetNextAttack();
+        }
+
+        private void SetNextAttack()
+        {
+
+            UpdateNextMainHandAttack();
+            //TODO Fix when offhand is implemented
+            NextOffHandAttack = 0;
         }
 
         public bool IsAlive()
@@ -32,6 +43,12 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
             PlayerCharacter.Stats.Health.CurrentValue += change;
         }
 
+        public void UpdateNextMainHandAttack(int timer = 0)
+        {
+            //TODO: Add haste
+            NextMainHandAttack = Convert.ToInt32(PlayerCharacter.EquippedItems.MainHand.SwingSpeed * 100) + timer;
+        }
+
         public int GetHealth()
         {
             return PlayerCharacter.Stats.Health.CurrentValue;
@@ -41,15 +58,15 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
         {
             if (mainHand)
                 return PlayerCharacter.EquippedItems.MainHand.MinDamage ;
-            else
-                return PlayerCharacter.EquippedItems.MainHand.MinDamage;
+
+            return PlayerCharacter.EquippedItems.MainHand.MinDamage;
         }
         public int GetMaxDamage(bool mainHand)
         {
             if (mainHand)
                 return PlayerCharacter.EquippedItems.MainHand.MaxDamage;
-            else
-                return PlayerCharacter.EquippedItems.MainHand.MaxDamage;
+
+            return PlayerCharacter.EquippedItems.MainHand.MaxDamage;
         }
     }
 }
