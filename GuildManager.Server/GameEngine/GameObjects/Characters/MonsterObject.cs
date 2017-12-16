@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using GuildManager.Data.GameObjects.Characters;
 using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
+using GuildManager.Server.GameEngine.Output.Combat;
 
 namespace GuildManager.Server.GameEngine.GameObjects.Characters
 {
@@ -13,6 +14,7 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
         public ICharacterObject TargetedBy { get; set; }
         public bool IsAttacker { get; set; }
         public bool IsMonster { get; set; }
+        public CombatStats CombatStats { get; set; }
         public int NextMainHandAttack { get; set; }
         public int NextOffHandAttack { get; set; }
 
@@ -22,6 +24,12 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
             IsAttacker = isAttacker;
             MonsterCharacter = monsterCharacter;
             SetNextAttack();
+            CombatStats = new CombatStats();
+        }
+
+        public string GetName()
+        {
+            return MonsterCharacter.Name;
         }
 
         public void SetNextAttack(int timer = 0)

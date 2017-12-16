@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
+using GuildManager.Server.GameEngine.Output.Combat;
 
 namespace GuildManager.Server.GameEngine.GameObjects.Characters
 {
@@ -11,6 +12,7 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
         ICharacterObject TargetedBy { get; set; }
         bool IsAttacker { get; set; }
         bool IsMonster { get; set; }
+        CombatStats CombatStats { get; set; }
 
         int NextMainHandAttack { get; set; }
         int NextOffHandAttack { get; set; }
@@ -20,6 +22,7 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
 
         bool IsAlive();
 
+        string GetName();
         int GetHealth();
         void ChangeHealth(int change);
 

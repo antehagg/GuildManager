@@ -19,6 +19,7 @@ namespace GuildManager.Server.GameEngine.AI.Combat
                 if (actor.Equals(actorGroup.MainAssist))
                 {
                     actor.Target = ChangeTarget(defenderGroup);
+                    return CombatDesicion.ChangeTarget;
                 }
                 else
                 {
@@ -30,7 +31,7 @@ namespace GuildManager.Server.GameEngine.AI.Combat
                 }
             }
 
-            if (timer == actor.NextMainHandAttack)
+            if (timer >= actor.NextMainHandAttack)
             {
                 return CombatDesicion.MainHandBaseAttack;
             }
@@ -43,7 +44,6 @@ namespace GuildManager.Server.GameEngine.AI.Combat
             var lowestHealth =  defenderGroup.Members.Min(m => m.GetHealth());
             return defenderGroup.Members.First(m => m.GetHealth() == lowestHealth);
         }
-
     }
 
     public enum CombatDesicion { Wait, MainHandBaseAttack, ChangeTarget }
