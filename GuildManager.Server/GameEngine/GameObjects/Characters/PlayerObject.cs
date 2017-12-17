@@ -4,33 +4,31 @@ using System.Text;
 using GuildManager.Data.GameData.Items;
 using GuildManager.Data.GameObjects.Characters;
 using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
+using GuildManager.Server.GameEngine.GameObjects.Characters.CharacterData;
 using GuildManager.Server.GameEngine.Output.Combat;
 
 namespace GuildManager.Server.GameEngine.GameObjects.Characters
 {
     public class PlayerObject : ICharacterObject
     {
-        public Player PlayerCharacter;
+        public ICharacter Character { get; set; }
         public ICharacterObject Target { get; set; }
         public ICharacterObject TargetedBy { get; set; }
         public bool IsAttacker { get; set; }
         public bool IsMonster { get; set; }
         public CombatStats CombatStats { get; set; }
+        public Threat Threat { get; set; }
         public int NextMainHandAttack { get; set; }
         public int NextOffHandAttack { get; set; }
 
-        public PlayerObject(Player pc, bool isAttacker)
+        public PlayerObject(ICharacter pc, bool isAttacker)
         {
             IsMonster = false;
             IsAttacker = isAttacker;
-            PlayerCharacter = pc;
+            Character = pc;
             SetNextAttack();
             CombatStats = new CombatStats();
-        }
-
-        public string GetName()
-        {
-            return PlayerCharacter.Name;
+            Threat = new Threat();
         }
 
         private void SetNextAttack()
@@ -43,38 +41,33 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
 
         public bool IsAlive()
         {
-            return PlayerCharacter.Stats.Health.CurrentValue > 0;
-        }
-
-        public void ChangeHealth(int change)
-        {
-            PlayerCharacter.Stats.Health.CurrentValue += change;
+            return Character.GetCurrentHealth() > 0;
         }
 
         public void UpdateNextMainHandAttack(int timer = 0)
         {
             //TODO: Add haste
-            NextMainHandAttack = Convert.ToInt32(PlayerCharacter.EquippedItems.MainHand.SwingSpeed * 100) + timer;
+            NextMainHandAttack = Convert.ToInt32(Character.EquippedItems.MainHand.SwingSpeed * 100) + timer;
         }
 
-        public int GetHealth()
+        public void UpdateCharacter()
         {
-            return PlayerCharacter.Stats.Health.CurrentValue;
+            throw new NotImplementedException();
         }
 
         public int GetMinDamage(bool mainHand)
         {
             if (mainHand)
-                return PlayerCharacter.EquippedItems.MainHand.MinDamage ;
+                return Character.EquippedItems.MainHand.MinDamage ;
 
-            return PlayerCharacter.EquippedItems.MainHand.MinDamage;
+            return Character.EquippedItems.MainHand.MinDamage;
         }
         public int GetMaxDamage(bool mainHand)
         {
             if (mainHand)
-                return PlayerCharacter.EquippedItems.MainHand.MaxDamage;
+                return Character.EquippedItems.MainHand.MaxDamage;
 
-            return PlayerCharacter.EquippedItems.MainHand.MaxDamage;
+            return Character.EquippedItems.MainHand.MaxDamage;
         }
     }
 }

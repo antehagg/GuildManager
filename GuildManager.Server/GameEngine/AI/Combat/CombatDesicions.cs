@@ -14,21 +14,9 @@ namespace GuildManager.Server.GameEngine.AI.Combat
         {
             var madeDdesicion = CombatDesicion.Wait;
             // Make sure actor has valid target
-            if (actor.Target == null)
+            if (ShouldChangeTarget(actor, actorGroup, defenderGroup))
             {
-                if (actor.Equals(actorGroup.MainAssist))
-                {
-                    actor.Target = ChangeTarget(defenderGroup);
-                    return CombatDesicion.ChangeTarget;
-                }
-                else
-                {
-                    if (actor.Target != actorGroup.MainAssist.Target)
-                    {
-                        actor.Target = actorGroup.MainAssist.Target;
-                        return CombatDesicion.ChangeTarget;
-                    }
-                }
+                return CombatDesicion.ChangeTarget;
             }
 
             if (timer >= actor.NextMainHandAttack)
@@ -39,10 +27,53 @@ namespace GuildManager.Server.GameEngine.AI.Combat
             return madeDdesicion;
         }
 
-        private static ICharacterObject ChangeTarget(CharacterGroup defenderGroup)
+        private static bool ShouldChangeTarget(ICharacterObject actor, CharacterGroup actorGroup, CharacterGroup defenderGroup)
         {
-            var lowestHealth =  defenderGroup.Members.Min(m => m.GetHealth());
-            return defenderGroup.Members.First(m => m.GetHealth() == lowestHealth);
+            if (actor.Target == null)
+            {
+                if (actor.Equals(actorGroup.MainAssist))
+                {
+                    actor.Target = ChangeTarget(actor, defenderGroup);
+                    return true;
+                }
+
+                if (actor.Target != actorGroup.MainAssist.Target)
+                {
+                    actor.Target = actorGroup.MainAssist.Target;
+                    return true;
+                }
+            }
+            else
+            {
+                // Check if monster change target because of threat
+                if (actor.GetType() == typeof(MonsterObject))
+                {
+                    if (actor.Threat.ThreatList.Keys.First().Equals(actor.Target))
+                        return false;
+
+                    actor.Target = ChangeTarget(actor, defenderGroup);
+                    return true;
+                }
+
+                if (actor.Target != actorGroup.MainAssist.Target)
+                {
+                    actor.Target = actorGroup.MainAssist.Target;
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
+        private static ICharacterObject ChangeTarget(ICharacterObject actor, CharacterGroup defenderGroup)
+        {
+            if (actor.GetType() == typeof(MonsterObject))
+            {
+                return actor.Threat.ThreatList.Keys.First();
+            }
+
+            var lowestHealth =  defenderGroup.Members.Min(m => m.Character.GetCurrentHealth());
+            return defenderGroup.Members.First(m => m.Character.GetCurrentHealth() == lowestHealth);
         }
     }
 

@@ -1,35 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using GuildManager.Data.GameObjects.Characters;
 using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
+using GuildManager.Server.GameEngine.GameObjects.Characters.CharacterData;
 using GuildManager.Server.GameEngine.Output.Combat;
 
 namespace GuildManager.Server.GameEngine.GameObjects.Characters
 {
     public class MonsterObject : ICharacterObject
     {
-        public MonsterCharacter MonsterCharacter;
+        public ICharacter Character { get; set; }
         public ICharacterObject Target { get; set; }
         public ICharacterObject TargetedBy { get; set; }
         public bool IsAttacker { get; set; }
         public bool IsMonster { get; set; }
         public CombatStats CombatStats { get; set; }
+        public Threat Threat { get; set; }
         public int NextMainHandAttack { get; set; }
         public int NextOffHandAttack { get; set; }
 
-        public MonsterObject(MonsterCharacter monsterCharacter, bool isAttacker)
+        public MonsterObject(ICharacter character, bool isAttacker)
         {
             IsMonster = true;
             IsAttacker = isAttacker;
-            MonsterCharacter = monsterCharacter;
+            Character = character;
             SetNextAttack();
             CombatStats = new CombatStats();
-        }
-
-        public string GetName()
-        {
-            return MonsterCharacter.Name;
+            Threat = new Threat();
         }
 
         public void SetNextAttack(int timer = 0)
@@ -43,19 +42,9 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
             NextMainHandAttack = 100 + timer;
         }
 
-        public void ChangeHealth(int change)
-        {
-            MonsterCharacter.Health.CurrentValue += change;
-        }
-
         public bool IsAlive()
         {
-            return MonsterCharacter.Health.CurrentValue > 0;
-        }
-
-        public int GetHealth()
-        {
-            return MonsterCharacter.Health.CurrentValue;
+            return Character.GetCurrentHealth() > 0;
         }
 
         public int GetMinDamage(bool mainHand)
@@ -71,6 +60,11 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
                 return 10;
             else
                 return 10;
+        }
+
+        public void UpdateCharacter()
+        {
+            throw new NotImplementedException();
         }
     }
 }
