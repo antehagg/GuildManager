@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildManager.Data.GameData.Items;
-
-namespace GuildManager.Data.GameData.Characters
+﻿namespace GuildManager.Data.GameData.Characters
 {
     public class DbInventory
     {

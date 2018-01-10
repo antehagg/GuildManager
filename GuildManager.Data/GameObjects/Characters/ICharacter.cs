@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GuildManager.Data.GameData.Classes;
+﻿using GuildManager.Data.GameData.Classes;
+using GuildManager.Data.GameObjects.Characters.Stats;
 
 namespace GuildManager.Data.GameObjects.Characters
 {
@@ -9,6 +7,7 @@ namespace GuildManager.Data.GameObjects.Characters
     {
         int Id { get; set; }
         string Name { get; set; }
+        PlayerStats Stats { get; set; }
         DbGameClass Class { get; set; }
         EquippedItems EquippedItems { get; set; }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GuildManager.Data.GameData.Items.Types
+﻿namespace GuildManager.Data.GameData.Items.Types
 {
     public enum ItemRarity
     {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using GuildManager.Data.GameData.Characters.CharactersData;
 using GuildManager.Data.GameData.Classes.GameClassData;
 
@@ -10,5 +8,6 @@ namespace GuildManager.Data.GameData.Characters
     {
         public BaseResources MonsterBaseResources { get; set; }
         public MonsterType MonsterType { get; set; }
+        public List<PossibleLoot> LootList { get; set; }
     }
 }

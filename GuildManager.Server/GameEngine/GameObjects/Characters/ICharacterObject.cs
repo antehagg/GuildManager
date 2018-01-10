@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GuildManager.Data.GameData.Abilities;
 using GuildManager.Data.GameObjects.Characters;
-using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
+using GuildManager.Server.GameEngine.AI.Combat;
 using GuildManager.Server.GameEngine.GameObjects.Characters.CharacterData;
 using GuildManager.Server.GameEngine.Output.Combat;
 
@@ -17,9 +15,10 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
         bool IsMonster { get; set; }
         CombatStats CombatStats { get; set; }
         Threat Threat { get; set; }
-
+        CombatConfig CombatConfig { get; set; }
         int NextMainHandAttack { get; set; }
         int NextOffHandAttack { get; set; }
+        IAbility AbilityToUse { get; set; }
 
         int GetMinDamage(bool mainHand);
         int GetMaxDamage(bool mainHand);

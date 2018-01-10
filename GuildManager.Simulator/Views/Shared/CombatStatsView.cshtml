@@ -1,0 +1,6 @@
+﻿@model GuildManager.Simulator.Models.CombatViewModels.CombatResultViewModel
+
+@foreach (var c in Model.CombatMembers)
+{
+    <p>@c.Character.Name @c.CombatStats.DpsStat.Damage @c.CombatStats.DpsStat.Dps</p>
+}

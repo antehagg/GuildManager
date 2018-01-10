@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GuildManager.Data.GameData.Classes;
-using GuildManager.Data.GameData.Items.Types;
-using GuildManager.Data.GameObjects.Characters.Stats;
+﻿using GuildManager.Data.GameData.Items.Types;
 
 namespace GuildManager.Data.GameData.Items
 {

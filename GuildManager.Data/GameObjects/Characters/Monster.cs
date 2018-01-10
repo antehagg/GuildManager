@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GuildManager.Data.GameData.Characters;
+﻿using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameData.Classes;
 using GuildManager.Data.GameData.Classes.GameClassData;
 using GuildManager.Data.GameObjects.Characters.Stats;
@@ -9,7 +6,7 @@ using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
 
 namespace GuildManager.Data.GameObjects.Characters
 {
-    public class MonsterCharacter : ICharacter
+    public class Monster : ICharacter
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,8 +15,9 @@ namespace GuildManager.Data.GameObjects.Characters
         public Resource Energy { get; set; }
         public BaseResources MonsterBaseResources { get; set; }
         public EquippedItems EquippedItems { get; set; }
+        public PlayerStats Stats { get; set; }
 
-        public MonsterCharacter(DbMonster monsterInfo)
+        public Monster(DbMonster monsterInfo)
         {
             MonsterBaseResources = monsterInfo.MonsterBaseResources;
             EquippedItems = null;

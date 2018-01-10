@@ -37,7 +37,7 @@ namespace GuildManager.Server
             response = client.Execute(request);
 
             var dbMonster = JsonConvert.DeserializeObject<DbMonster>(response.Content);
-            var monster = new MonsterCharacter(dbMonster);
+            var monster = new Monster(dbMonster);
 
             var warriorPlayer = new PlayerObject(vexing, true);
             var roguePlayer = new PlayerObject(credit, true);

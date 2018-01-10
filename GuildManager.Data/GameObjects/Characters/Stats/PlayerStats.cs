@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GuildManager.Data.GameData.Classes;
+﻿using GuildManager.Data.GameData.Classes;
 using GuildManager.Data.GameData.Classes.GameClassData;
 using GuildManager.Data.GameData.Items.ItemsData;
 using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
@@ -25,6 +23,18 @@ namespace GuildManager.Data.GameObjects.Characters.Stats
         {
             CalculateStats(baseStats, itemStats);
             CalculateResources(baseResources, mainStat, itemStats);
+        }
+
+        public void BuffStats(BuffStats buffStats)
+        {
+            Health.MaxValue += buffStats.Health;
+            Health.CurrentValue += buffStats.Health;
+        }
+
+        public void RemoveBuffStats(BuffStats buffStats)
+        {
+            Health.MaxValue -= buffStats.Health;
+            Health.CurrentValue -= buffStats.Health;
         }
 
         private void CalculateStats(BaseStats baseStats, ItemStats itemStats)

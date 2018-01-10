@@ -1,5 +1,3 @@
-using System;
-
 namespace GuildManager.Simulator.Models
 {
     public class ErrorViewModel

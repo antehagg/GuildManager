@@ -24,4 +24,8 @@
     <ProjectReference Include="..\GuildManager.Server\GuildManager.Server.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
+
 </Project>

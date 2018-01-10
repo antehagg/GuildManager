@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Linq;
+using GuildManager.Data.GameData.Abilities.EffectData;
 using GuildManager.Server.GameEngine.GameObjects.Characters;
 using GuildManager.Server.GameEngine.GameObjects.Groups;
 
@@ -13,16 +10,33 @@ namespace GuildManager.Server.GameEngine.AI.Combat
         public static CombatDesicion MakeDesicion(ICharacterObject actor, CharacterGroup actorGroup, CharacterGroup defenderGroup, int timer)
         {
             var madeDdesicion = CombatDesicion.Wait;
-            // Make sure actor has valid target
+
             if (ShouldChangeTarget(actor, actorGroup, defenderGroup))
-            {
                 return CombatDesicion.ChangeTarget;
+
+            foreach (var a in actor.CombatConfig.PriorityList)
+            {
+                if (a.Effects.First().GetType() == typeof(DirectDamageEffect))
+                {
+                    actor.AbilityToUse = a;
+                    if (!actor.AbilityToUse.OnCoolDown())
+                    {
+                        return CombatDesicion.UseSKill;
+                    }
+                }
+
+                if (a.Effects.First().GetType() == typeof(DirectThreatEffect))
+                {
+                    actor.AbilityToUse = a;
+                    if (!actor.AbilityToUse.OnCoolDown())
+                    {
+                        return CombatDesicion.UseSKill;
+                    }
+                }
             }
 
             if (timer >= actor.NextMainHandAttack)
-            {
                 return CombatDesicion.MainHandBaseAttack;
-            }
 
             return madeDdesicion;
         }
@@ -77,5 +91,5 @@ namespace GuildManager.Server.GameEngine.AI.Combat
         }
     }
 
-    public enum CombatDesicion { Wait, MainHandBaseAttack, ChangeTarget }
+    public enum CombatDesicion { Wait, MainHandBaseAttack, ChangeTarget, FindTarget, GetThreat, UseSKill }
 }

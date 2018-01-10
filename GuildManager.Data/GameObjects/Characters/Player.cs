@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GuildManager.Data.GameData.Characters;
+﻿using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameData.Classes;
-using GuildManager.Data.GameData.Classes.GameClassData;
 using GuildManager.Data.GameObjects.Characters.Stats;
 
 namespace GuildManager.Data.GameObjects.Characters

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GuildManager.Api.Data;
 using GuildManager.Api.Data.Contexts;
 using GuildManager.Data.GameData.Items;
-using GuildManager.Data.GameObjects.Characters;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GuildManager.Api.Controllers
 {
@@ -24,9 +21,12 @@ namespace GuildManager.Api.Controllers
         [HttpGet("{weaponId}")]
         public DbWeapon Weapon(int weaponId)
         {
-            var weaponContext = new WeaponContext(Services);
-            var weapon = weaponContext.GetWeaponById(weaponId);
-            return weapon;
+            using (var context = Services.GetService<GuildManagerContext>())
+            {
+                var weaponContext = new WeaponContext(context);
+                var weapon = weaponContext.GetWeaponById(weaponId);
+                return weapon;
+            }
         }
     }
 }

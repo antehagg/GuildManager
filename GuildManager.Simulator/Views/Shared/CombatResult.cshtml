@@ -1,0 +1,38 @@
+﻿@model GuildManager.Simulator.Models.CombatViewModels.CombatResultViewModel
+
+@{
+    ViewData["Title"] = "Combat Simulator";
+}
+
+<div class="container-fluid row">
+    <div class="col-md-2 container">
+        <h2>Attackers</h2>
+        
+        @foreach (var m in Model.Attackers.Members)
+        {
+            <p>@m.Character.Name</p>
+        }
+
+    </div>
+    <div class="col-md-2 container">
+        <h2>Defenders</h2>
+            @foreach (var m in Model.Defenders.Members)
+            {
+                <p>@m.Character.Name</p>
+            }
+    </div>
+</div>
+<div class="container-fluid row">
+    <div class="col-md-6 row container">
+        <div class=" col-md-12">
+            <h2>Fights</h2>
+        </div>
+        <div class="col-md-2">
+            <p>Fight 1</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    @Html.Partial("CharacterView", Model.Attackers.Members.First())
+    @Html.Partial("CombatStatsView", Model)
+</div>

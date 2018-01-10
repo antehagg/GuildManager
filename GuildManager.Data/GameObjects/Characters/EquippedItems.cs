@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GuildManager.Data.GameData.Characters;
+﻿using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameData.Items;
 using GuildManager.Data.GameData.Items.ItemsData;
-using GuildManager.Data.GameData.Items.Types;
 
 namespace GuildManager.Data.GameObjects.Characters
 {

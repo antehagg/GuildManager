@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GuildManager.Data.GameObjects.Characters.Stats.SpecificStat
+﻿namespace GuildManager.Data.GameObjects.Characters.Stats.SpecificStat
 {
     public class Health : Resource
     {

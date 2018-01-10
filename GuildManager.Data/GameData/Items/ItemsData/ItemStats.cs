@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GuildManager.Data.GameData.Items.ItemsData
+﻿namespace GuildManager.Data.GameData.Items.ItemsData
 {
     public class ItemStats
     {
@@ -15,6 +11,8 @@ namespace GuildManager.Data.GameData.Items.ItemsData
 
         public double Haste { get; set; }
         public double CritChance { get; set; }
+
+        public int Armor { get; set; }
 
         public int Health { get; set; }
         public int Energy { get; set; }

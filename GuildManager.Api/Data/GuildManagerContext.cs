@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Linq;
-using GuildManager.Api.Data.Contexts;
+using GuildManager.Data.GameData.Abilities;
 using GuildManager.Data.GameData.Characters;
 using GuildManager.Data.GameData.Classes;
 using GuildManager.Data.GameData.Classes.GameClassData;
 using GuildManager.Data.GameData.Items;
 using GuildManager.Data.GameData.Items.ItemsData;
+using GuildManager.Data.GameData.Items.Types;
+using GuildManager.Data.GameData.Zones;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GuildManager.Api.Data
 {
@@ -25,6 +26,9 @@ namespace GuildManager.Api.Data
         public DbSet<DbGameClass> GameClasses { get; set; }
         public DbSet<BaseStats> BaseStats { get; set; }
         public DbSet<BaseResources> BaseResources { get; set; }
+        public DbSet<DbArmor> Armor { get; set; }
+        public DbSet<DbZone> Zones { get; set; }
+        public DbSet<Skill> Skills { get; set; }
 
         public DbMonster[] GetAllMonsters()
         {

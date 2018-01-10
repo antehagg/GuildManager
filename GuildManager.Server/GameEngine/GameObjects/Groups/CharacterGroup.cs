@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using GuildManager.Server.GameEngine.GameObjects.Characters;
 
 namespace GuildManager.Server.GameEngine.GameObjects.Groups
@@ -21,6 +19,15 @@ namespace GuildManager.Server.GameEngine.GameObjects.Groups
         public void UpdateGroup()
         {
             CheckDeadStatus();
+            UpdateCharacters();
+        }
+
+        private void UpdateCharacters()
+        {
+            foreach (var c in Members)
+            {
+                c.UpdateCharacter();
+            }
         }
 
         private void CheckDeadStatus()

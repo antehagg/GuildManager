@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GuildManager.Server.GameEngine.GameObjects.Characters;
-using GuildManager.Server.GameEngine.Output.Combat.CombatData;
+﻿using GuildManager.Server.GameEngine.Output.Combat.CombatData;
 
 namespace GuildManager.Server.GameEngine.Output.Combat
 {

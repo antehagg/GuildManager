@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using GuildManager.Data.GameData.Abilities;
 using GuildManager.Data.GameObjects.Characters;
-using GuildManager.Data.GameObjects.Characters.Stats.SpecificStat;
+using GuildManager.Server.GameEngine.AI.Combat;
 using GuildManager.Server.GameEngine.GameObjects.Characters.CharacterData;
 using GuildManager.Server.GameEngine.Output.Combat;
 
@@ -20,6 +18,8 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
         public Threat Threat { get; set; }
         public int NextMainHandAttack { get; set; }
         public int NextOffHandAttack { get; set; }
+        public IAbility AbilityToUse { get; set; }
+        public CombatConfig CombatConfig { get; set; }
 
         public MonsterObject(ICharacter character, bool isAttacker)
         {
@@ -64,7 +64,15 @@ namespace GuildManager.Server.GameEngine.GameObjects.Characters
 
         public void UpdateCharacter()
         {
-            throw new NotImplementedException();
+            UpdateCooldowns();
+        }
+
+        private void UpdateCooldowns()
+        {
+            foreach (var a in Character.Class.Skills)
+            {
+                a.LowerCoolDownOne();
+            }
         }
     }
 }
