@@ -6,6 +6,7 @@ namespace GuildManager.Data.GameData.Abilities
     {
         int Id { get; set; }
         string Name { get; set; }
+        string Description { get; set; }
         int Cost { get; set; }
         int Cooldown { get; set; }
         int CastTime { get; set; }

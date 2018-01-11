@@ -16,7 +16,7 @@ namespace GuildManager.Data.GameData.Characters
         public virtual DbArmor Leg { get; set; }
         public virtual DbArmor Feet { get; set; }
         public virtual DbArmor Neck { get; set; }
-        public virtual DbArmor RinegOne { get; set; }
+        public virtual DbArmor RingOne { get; set; }
         public virtual DbArmor RingTwo { get; set; }
     }
 }

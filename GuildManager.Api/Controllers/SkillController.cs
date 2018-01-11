@@ -17,7 +17,7 @@ namespace GuildManager.Api.Controllers
             Services = services;
         }
 
-        // GET api/PlayerCharacter
+        // GET api/Skil
         [HttpGet]
         public IEnumerable<Skill> Get()
         {

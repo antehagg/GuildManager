@@ -8,6 +8,7 @@ namespace GuildManager.Data.GameData.Classes
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public BaseStats BaseStats { get; set; }
         public BaseResources BaseResources { get; set; }
         public StatName MainStat { get; set; }

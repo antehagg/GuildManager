@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using GuildManager.Api.Data;
 using GuildManager.Api.Data.Contexts;
 using GuildManager.Data.GameData.Items;
@@ -23,6 +24,7 @@ namespace GuildManager.Api.Controllers
         {
             using (var context = Services.GetService<GuildManagerContext>())
             {
+                var test = context.Weapons.ToList();
                 var weaponContext = new WeaponContext(context);
                 var weapon = weaponContext.GetWeaponById(weaponId);
                 return weapon;

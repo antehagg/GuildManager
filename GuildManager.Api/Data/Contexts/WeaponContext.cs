@@ -21,7 +21,7 @@ namespace GuildManager.Api.Data.Contexts
 
         public DbWeapon GetWeaponById(int itemId)
         {
-            var weapon = _context.Weapons.Include(w => w.Stats).First(w => w.Id == itemId);
+            var weapon = _context.Weapons.Include(w => w.Stats).FirstOrDefault(w => w.Id == itemId);
             return weapon;
         }
     }
