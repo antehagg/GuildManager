@@ -87,5 +87,9 @@ namespace GuildManager.Api.Data
                 throw;
             }
         }
+
+        public DbSet<GuildManager.Data.GameData.Abilities.Effect> Effect { get; set; }
+
+        public DbSet<GuildManager.Data.GameData.Items.DbItem> DbItem { get; set; }
     }
 }

@@ -1,0 +1,22 @@
+﻿@using GuildManager.Data.GameData.Items
+@model DbWeapon
+
+@{
+    ViewBag.Title = "Weapon";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 weaponDetails">
+            <h2>@Model.Name</h2>
+            <p>@Model.Description</p>
+            <p>@Model.WeaponEquipType</p>
+            <p>@Model.WeaponType</p>
+            <p>@Model.MinDamage - @Model.MaxDamage Damage</p>
+            <p>@Model.SwingSpeed Speed</p>
+            <p>@Model.Stats.Agility Agility</p>
+            <p>@Model.Stats.CritChance Crit</p>
+        </div>
+    </div>
+</div>

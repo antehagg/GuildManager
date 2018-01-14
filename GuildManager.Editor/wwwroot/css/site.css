@@ -33,3 +33,13 @@
         display: none;
     }
 }
+
+.weaponDetails {
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-left: 15px;
+    border-color: dimgray;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: lightblue;
+}
